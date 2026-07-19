@@ -7,7 +7,18 @@
 <meta name="theme-color" content="#F4F1EA">
 <title>Resume · Anthony Hinojosa</title>
 <meta name="description" content="Resume of Anthony Hinojosa: industrial laboratory technician, NREMT, and emergency responder across petrochemical operations, product quality, and safety.">
-<link rel="canonical" href="https://anthonyhinojosa.com/">
+<link rel="canonical" href="https://anthonyhinojosa77.github.io/resume.html">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Anthony Hinojosa">
+<meta property="og:title" content="Resume · Anthony Hinojosa">
+<meta property="og:description" content="Resume of Anthony Hinojosa: industrial laboratory technician, NREMT, and emergency responder across petrochemical operations, product quality, and safety.">
+<meta property="og:url" content="https://anthonyhinojosa77.github.io/resume.html">
+<meta property="og:image" content="https://anthonyhinojosa77.github.io/images/headshot.jpg">
+<meta property="og:image:alt" content="Anthony Hinojosa">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Resume · Anthony Hinojosa">
+<meta name="twitter:description" content="Resume of Anthony Hinojosa: industrial laboratory technician, NREMT, and emergency responder across petrochemical operations, product quality, and safety.">
+<meta name="twitter:image" content="https://anthonyhinojosa77.github.io/images/headshot.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -55,6 +66,31 @@
   .resume-list li::before {
     content: ""; position: absolute; left: 0; top: 10px;
     width: 10px; height: 1px; background: var(--signal);
+  }
+
+  /* Print: clean single-column resume, ink on paper */
+  @media print {
+    /* Force light tokens even if a dark theme is saved */
+    :root, body[data-theme="dark"] {
+      --paper: #FFFFFF; --paper-2: #FFFFFF; --paper-3: #F0EDE4;
+      --ink: #0E0E10; --ink-2: #2A2A2D; --ink-3: #5A5A5F; --ink-4: #6E6B62;
+      --rule: #C9C4B4; --rule-2: #B5AE9A;
+    }
+    .nav, .site-footer, .skip, .download-row, .tweaks-panel, .tweaks-trigger { display: none !important; }
+    body::before { display: none; }
+    body { background: #FFFFFF; color: #0E0E10; font-size: 12px; }
+    /* Un-reveal everything regardless of scroll position */
+    .reveal, .scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .page-header { padding: 0 0 20px; border-bottom: 2px solid var(--ink); }
+    .page-header h1 { font-size: 36px; margin: 10px 0 12px; }
+    .page-header .lede { font-size: 14px; }
+    .section { padding: 20px 0; }
+    .resume-block { margin-bottom: 24px; break-inside: avoid; }
+    .resume-summary { font-size: 16px; }
+    .tl-item { padding: 14px 0; break-inside: avoid; }
+    .tl-body h3 { font-size: 20px; }
+    .tag { border-color: var(--rule-2); }
+    a { color: inherit; }
   }
 </style>
 </head>
@@ -229,6 +265,6 @@
   </div>
 </footer>
 
-<script src="js/site.js"></script>
+<script src="js/site.js" defer></script>
 </body>
 </html>

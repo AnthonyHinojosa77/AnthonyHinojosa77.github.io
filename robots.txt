@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://anthonyhinojosa77.github.io/sitemap.xml

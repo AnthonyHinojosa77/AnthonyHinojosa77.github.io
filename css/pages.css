@@ -63,6 +63,18 @@
 .tp-swatches button.on { border-color: var(--ink); box-shadow: inset 0 0 0 2px var(--paper); transform: scale(1.1); }
 .tp-foot { padding: 10px 16px; color: var(--ink-4); text-align: right; font-size: 9px !important; }
 
+/* Footer button that opens the tweaks panel (injected by site.js) */
+.tweaks-trigger {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+.tweaks-trigger:hover { color: var(--signal); }
+
 /* ===== HOME ===== */
 
 /* Pre-hero ticker */
@@ -104,6 +116,7 @@
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
@@ -388,7 +401,7 @@ body[data-theme="dark"] .cta-readout div { border-top-color: var(--rule); }
 }
 .bio-block { margin-bottom: 48px; }
 .bio-block:last-child { margin-bottom: 0; }
-.bio-block h3 {
+.bio-block h2 {
   font-family: var(--f-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -399,7 +412,7 @@ body[data-theme="dark"] .cta-readout div { border-top-color: var(--rule); }
   border-bottom: var(--hair);
   display: flex; justify-content: space-between; align-items: center;
 }
-.bio-block h3 .num { color: var(--signal); }
+.bio-block h2 .num { color: var(--signal); }
 .bio-block p {
   font-family: var(--f-display);
   font-size: 28px;
@@ -439,7 +452,7 @@ body[data-theme="dark"] .cta-readout div { border-top-color: var(--rule); }
   margin-bottom: 32px;
   display: block;
 }
-.philo-item h4 {
+.philo-item h3 {
   font-family: var(--f-display);
   font-size: 28px;
   line-height: 1;
@@ -537,7 +550,7 @@ body[data-theme="dark"] .cta-readout div { border-top-color: var(--rule); }
   border-right: var(--hair);
   border-bottom: var(--hair);
 }
-.star-item h4 {
+.star-item h3 {
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -546,7 +559,7 @@ body[data-theme="dark"] .cta-readout div { border-top-color: var(--rule); }
   margin-bottom: 12px;
   display: flex; align-items: center; gap: 8px;
 }
-.star-item h4::before {
+.star-item h3::before {
   content: attr(data-letter);
   display: inline-grid; place-items: center;
   width: 20px; height: 20px;

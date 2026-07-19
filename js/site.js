@@ -14,12 +14,13 @@
   );
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   // Scroll-reveal for stat / project cards (adds .is-visible as they enter view)
   const srEls = document.querySelectorAll(".scroll-reveal");
   if (srEls.length) {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
     if (prefersReducedMotion) {
       // Respect reduced motion: show cards immediately, no transition.
       srEls.forEach((el) => el.classList.add("is-visible"));
@@ -48,6 +49,11 @@
       const el = e.target;
       const target = parseFloat(el.dataset.counter);
       const suffix = el.dataset.suffix || "";
+      if (prefersReducedMotion) {
+        // Respect reduced motion: jump straight to the final value.
+        el.textContent = (Number.isInteger(target) ? target : target.toFixed(1)) + suffix;
+        return;
+      }
       const duration = 1200;
       const start = performance.now();
       const from = 0;
@@ -83,7 +89,13 @@
 
   function applyTweaks() {
     document.body.dataset.theme = tweaks.theme;
-    document.documentElement.style.setProperty("--signal", tweaks.accent);
+    // Set a custom accent inline on <body> so it also wins over the
+    // dark-theme token; clear it at the default so the CSS themes govern.
+    if (tweaks.accent && tweaks.accent !== TWEAK_DEFAULTS.accent) {
+      document.body.style.setProperty("--signal", tweaks.accent);
+    } else {
+      document.body.style.removeProperty("--signal");
+    }
     // hero variant: toggle body class
     document.body.classList.remove("hv-editorial", "hv-instrument", "hv-minimal");
     document.body.classList.add("hv-" + (tweaks.heroVariant || "editorial"));
@@ -184,6 +196,22 @@
   });
   window.parent.postMessage({ type: "__edit_mode_available" }, "*");
 
+  // Footer trigger so visitors can open the panel too; the editor
+  // postMessage protocol above stays supported.
+  const footerBottom = document.querySelector(".footer-bottom");
+  if (footerBottom) {
+    const trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "tweaks-trigger";
+    trigger.textContent = "◧ TWEAKS";
+    trigger.setAttribute("aria-label", "Open display tweaks panel");
+    trigger.addEventListener("click", () => {
+      buildPanel();
+      panel.classList.toggle("open");
+    });
+    footerBottom.appendChild(trigger);
+  }
+
   // Filters (project page)
   const groups = document.querySelectorAll("[data-filter-group]");
   groups.forEach((grp) => {
@@ -204,7 +232,7 @@
     });
   });
 
-  // Live clock in nav/footer — Anthony's local time (US Central, auto CST/CDT)
+  // Live clock in nav/footer, Anthony's local time (US Central, auto CST/CDT)
   const clocks = document.querySelectorAll("[data-clock]");
   if (clocks.length) {
     const ctFmt = new Intl.DateTimeFormat("en-US", {

@@ -28,8 +28,9 @@ career-site/
 ├── skills.html             # Six skill domains, each linking to its STAR story
 ├── blog.html               # Writing listing + category filters
 ├── blog-post.html          # Single post (AI + QA in Refineries)
-├── resume.html             # Web resume + PDF download
+├── resume.html             # Web resume + PDF download + print styles
 ├── contact.html            # Contact form + direct email + location
+├── 404.html                # Styled not-found page (noindex)
 ├── css/
 │   ├── system.css          # Design tokens, reset, nav, footer, buttons, cards, helpers
 │   └── pages.css           # Tweaks panel + page-specific components
@@ -38,8 +39,11 @@ career-site/
 │   ├── mindmap-data.js     # Domain + leaf data for the experience map
 │   └── mindmap.js          # Mind map engine (build, layout, camera pan, detail panel)
 ├── images/
+│   ├── favicon.ico         # Site icon
 │   └── headshot.jpg        # Professional headshot
 ├── resume.pdf              # Downloadable resume
+├── sitemap.xml             # All pages, referenced from robots.txt
+├── robots.txt
 ├── README.md
 └── CLAUDE.md               # This file
 ```
@@ -48,13 +52,19 @@ career-site/
 - **Nav (every page):** Index · About · Experience · Map · Projects · Certs · Contact.
   `aria-current="page"` marks the active link. Blog/Resume/Skills are reached via the footer.
 - **Footer:** four columns (identity / Site / Credentials / Contact) + mono bottom bar with
-  live UTC clock (`[data-clock]`).
+  live local-time clock (America/Chicago, rendered as "CT") via `[data-clock]`.
 - **Reveal:** add class `reveal` (and the IntersectionObserver in `site.js` adds `in`).
 - **Counters:** `[data-counter]` with optional `[data-suffix]`.
 - **Filters:** wrap in `[data-filter-group="name"]`, buttons use `[data-filter]` and toggle
   `.on`; items use `[data-filter-item="name"]` + `[data-category]`.
-- **Tweaks panel:** toolbar-activated; swaps theme (Paper/Ink), hero variant, and accent color.
-  Persists to `localStorage` (`ah-theme`, `ah-tweaks`).
+- **Tweaks panel:** opened from the TWEAKS button in the footer bottom bar (injected by
+  `site.js`; the editor postMessage protocol also works). Swaps theme (Paper/Ink), hero
+  variant, and accent color. Persists to `localStorage` (`ah-theme`, `ah-tweaks`).
+- **SEO:** every page carries its own canonical URL plus Open Graph/Twitter tags pointing
+  at `https://anthonyhinojosa77.github.io`. `sitemap.xml` lists all pages; `robots.txt`
+  references it. Keep URLs in sync when adding a page.
+- **Print:** `resume.html` has an `@media print` block: hides nav/footer/download row,
+  forces light tokens, unreveals animations, single column.
 
 ## Mind map (mindmap.html + js/mindmap*.js)
 Progressive-disclosure map with a camera that pans the focused node to center.

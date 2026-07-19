@@ -120,7 +120,8 @@
   }
 
   function build() {
-    const center = document.createElement('div');
+    const center = document.createElement('button');
+    center.type = 'button';
     center.className = 'mm-node mm-center visible';
     center.innerHTML = `
       <span class="mono">OPERATOR / NODE 00</span>
@@ -306,7 +307,8 @@
       // Scroll so the detail panel's top sits ~96px below the viewport top,
       // leaving room for the sticky nav.
       const targetY = window.scrollY + r.top - 96;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: targetY, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   }
 

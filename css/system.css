@@ -199,6 +199,19 @@ body[data-theme="dark"]::before {
 }
 .nav-cta:hover { background: var(--ink); color: var(--paper); }
 
+/* Small screens: compact brand, links scroll horizontally instead of overflowing */
+@media (max-width: 900px) {
+  .brand .slash, .brand > span:last-of-type { display: none; }
+  .nav-links {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { flex-shrink: 0; padding: 8px 9px; font-size: 11px; }
+  .nav-cta { flex-shrink: 0; margin-left: 8px; padding: 8px 12px; white-space: nowrap; }
+}
+
 /* Buttons */
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
