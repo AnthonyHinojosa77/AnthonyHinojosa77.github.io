@@ -12,7 +12,7 @@ accent, editorial serif display paired with mono technical readouts.
   Light/dark themes via `body[data-theme]`. All tokens live in `css/system.css`.
 - **Type:** Instrument Serif (display), Inter (body), JetBrains Mono (readouts).
 - **Motif:** File-numbered sections, serial-code IDs (CAP-01, EDU-01), crosshair
-  corners, live UTC clock, "dossier" vocabulary across every page.
+  corners, live Central Time (CT) clock, "dossier" vocabulary across every page.
 - **House rule:** No em-dashes anywhere in the site (copy, comments, or markup).
 
 ## File Structure
